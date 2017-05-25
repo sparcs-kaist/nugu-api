@@ -5,6 +5,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 
+from django.db import models
+
 from .settings import DB_URL
 
 
@@ -31,9 +33,14 @@ NUGU_FIELDS = [
 NUGU_FIELD_NAMES = [field['id'] for field in NUGU_FIELDS
                     if not field.get('readonly', False)]
 
+class User(models.Model):
+    class Meta:
+        db_table = 'user'
+
+
 Base = declarative_base()
 
-
+'''
 class User(Base):
     __tablename__ = 'user'
 
@@ -76,7 +83,7 @@ class User(Base):
 
     def __str__(self):
         return u'%s (%s, %s)' % (self.id, self.name, self.ent_year)
-
+'''
 
 def create_session():
     engine = create_engine(DB_URL, pool_recycle=100)
