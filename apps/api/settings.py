@@ -4,6 +4,7 @@ import sys
 
 from yarl import URL
 
+'''
 SLACK_TOKEN = os.environ.get('NUGU_SLACK_TOKEN')
 
 DEBUG = bool(int(os.environ.get('DEBUG', '0')))
@@ -25,13 +26,13 @@ else:
     DB_TYPE = 'mysql'
     try:
         DB_HOST    = os.environ['NUGU_DB_HOST']
+        DB_NAME    = os.environ['NUGU_DB_NAME']
         DB_USER_ID = os.environ['NUGU_DB_USER']
         DB_USER_PW = os.environ['NUGU_DB_PASSWORD']
     except KeyError:
-        print('Please set NUGU_DB_HOST, NUGU_DB_USER, NUGU_DB_PASSWORD environment variables.',
+        print('Please set NUGU_DB_HOST, NUGU_DB_NAME, NUGU_DB_USER, NUGU_DB_PASSWORD environment variables.',
               file=sys.stderr)
         sys.exit(1)
-    DB_NAME = 'nugu'
     DB_OPTS = {'charset': 'utf8'}
 
 if DB_TYPE == 'sqlite':
@@ -52,3 +53,4 @@ if DB_TYPE == 'sqlite':
     DB_URL = '{}://'.format(DB_TYPE) + str(DB_URL)
 elif DB_TYPE == 'mysql':
     DB_URL = str(DB_URL)
+'''

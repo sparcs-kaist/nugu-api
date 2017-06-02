@@ -1,13 +1,13 @@
 from datetime import datetime
-
+'''
 from sqlalchemy import (Column, String, DateTime)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
-
+'''
 from django.db import models
 
-from .settings import DB_URL
+# from .settings import DB_URL
 
 
 NUGU_FIELDS = [
@@ -33,14 +33,57 @@ NUGU_FIELDS = [
 NUGU_FIELD_NAMES = [field['id'] for field in NUGU_FIELDS
                     if not field.get('readonly', False)]
 
+
 class User(models.Model):
     class Meta:
         db_table = 'user'
 
+    id = models.CharField(max_length=30, primary_key=True)
+    name = models.CharField(max_length=255, null=True)
+    ent_year = models.CharField(max_length=255, null=True)
+    org = models.CharField(max_length=255, null=True)
+    email = models.CharField(max_length=255, null=True)
+    phone = models.CharField(max_length=255, null=True)
+    birth = models.CharField(max_length=255, null=True)
+    dorm = models.CharField(max_length=255, null=True)
+    lab = models.CharField(max_length=255, null=True)
+    home_add = models.CharField(max_length=255, null=True)
+    facebook_id = models.CharField(max_length=255, null=True)
+    twitter_id = models.CharField(max_length=255, null=True)
+    github_id = models.CharField(max_length=255, null=True)
+    battlenet_id = models.CharField(max_length=255, null=True)
+    website = models.CharField(max_length=255, null=True)
+    blog = models.CharField(max_length=255, null=True)
+    created_on = models.DateTimeField(default=datetime.utcnow)
+    updated_on = models.DateTimeField(default=datetime.utcnow
+                                      # , onupdate=datetime.utcnow
+                                      )
 
-Base = declarative_base()
+    @staticmethod
+    def _gen_json(value_func):
+        result = ['{', ]
+        for i in NUGU_FIELDS:
+            if i.get('readonly', False):
+                continue
+            result.append('    "%s": "%s",' % (i['id'], value_func(i)))
+        result[-1] = result[-1][:-1]
+        result.append('}')
+        return '\n'.join(result)
+
+    @staticmethod
+    def default_json():
+        return User._gen_json(lambda i: i.get('hint', ''))
+
+    def to_json(self):
+        return self._gen_json(lambda i: getattr(self, i['id']) or "")
+
+    def __str__(self):
+        return u'%s (%s, %s)' % (self.id, self.name, self.ent_year)
+
 
 '''
+Base = declarative_base()
+
 class User(Base):
     __tablename__ = 'user'
 
@@ -83,7 +126,6 @@ class User(Base):
 
     def __str__(self):
         return u'%s (%s, %s)' % (self.id, self.name, self.ent_year)
-'''
 
 def create_session():
     engine = create_engine(DB_URL, pool_recycle=100)
@@ -92,3 +134,5 @@ def create_session():
     Base.metadata.bind = engine
     DBSession = sessionmaker(bind=engine)
     return DBSession()
+
+'''
