@@ -56,6 +56,7 @@ class User(models.Model):
     blog = models.CharField(max_length=255, null=True)
     created_on = models.DateTimeField(default=datetime.utcnow)
     updated_on = models.DateTimeField(default=datetime.utcnow
+                                      # auto_now=True
                                       # , onupdate=datetime.utcnow
                                       )
 
