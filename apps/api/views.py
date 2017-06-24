@@ -1,27 +1,48 @@
-from rest_framework import viewsets
-from rest_framework.decorators import detail_route, list_route
+from rest_framework import status
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from apps.api.serializers import UserSerializer
-# from .core import nugu_list
 from .models import User
 
 
-class UserViewSet(viewsets.ModelViewSet):
+@api_view(['GET'])
+def user_list(request):
+    users = User.objects.all().order_by('-ent_year')
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def user_detail(request, pk):
     """
-    API endpoint that allows users to be viewed or edited.
+    Retrieve, update or delete an user instance.
     """
 
-    queryset = User.objects.all().order_by('-ent_year')
-    serializer_class = UserSerializer
+    if request.method in ['GET', 'DELETE']:
+        try:
+            user = User.objects.get(id=pk)
+        except User.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
-    @list_route()
-    def all(self, request):
-        all_users = User.objects.all().order_by('-ent_year')
-        serializer = self.get_serializer(all_users, many=True)
+    if request.method == 'GET':
+        serializer = UserSerializer(user)
         return Response(serializer.data)
 
-    @detail_route(methods=['get'])
-    def get(self, request, pk=None):
-        users = User.objects.filter(id=pk).first()
-        serializer = self.get_serializer(users)
-        return Response(serializer.data)
+    elif request.method == 'PUT':
+        try:
+            user = User.objects.get(id=pk)
+        except User.DoesNotExist:
+            user = User()
+
+        data = request.data
+        data["id"] = pk
+
+        serializer = UserSerializer(user, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
