@@ -12,6 +12,8 @@ from django.db import models
 
 NUGU_FIELDS = [
     {'id': 'name', 'name': '이름', 'hint': '뀨냥이'},
+    {'id': 'is_developer', 'name': '개발자인가', 'hint': 'false'},
+    {'id': 'is_designer', 'name': '디자이너인가', 'hint': 'false'},
     {'id': 'ent_year', 'name': '학번', 'hint': '14'},
     {'id': 'org', 'name': '소속'},
     {'id': 'email', 'name': '이메일'},
@@ -40,6 +42,8 @@ class User(models.Model):
 
     id = models.CharField(max_length=30, primary_key=True)
     name = models.CharField(max_length=255, null=True)
+    is_developer = models.BooleanField()
+    is_designer = models.BooleanField()
     ent_year = models.CharField(max_length=255, null=True)
     org = models.CharField(max_length=255, null=True)
     email = models.CharField(max_length=255, null=True)
