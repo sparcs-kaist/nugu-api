@@ -1,4 +1,4 @@
-from datetime import datetime
+from django.utils import timezone
 '''
 from sqlalchemy import (Column, String, DateTime)
 from sqlalchemy.ext.declarative import declarative_base
@@ -23,7 +23,7 @@ NUGU_FIELDS = [
     {'id': 'lab', 'name': '랩'},
     {'id': 'home_add', 'name': '집주소'},
     {'id': 'github_id', 'name': 'Github ID'},
-    {'id': 'linkedin_id', 'name': 'Github ID'},
+    {'id': 'linkedin_url', 'name': 'LinkedIn URL'},
     {'id': 'facebook_id', 'name': 'Facebook ID'},
     {'id': 'twitter_id', 'name': 'Twitter ID'},
     {'id': 'battlenet_id', 'name': 'Battlenet ID'},
@@ -43,8 +43,8 @@ class User(models.Model):
 
     id = models.CharField(max_length=30, primary_key=True)
     name = models.CharField(max_length=255, null=True)
-    is_developer = models.BooleanField()
-    is_designer = models.BooleanField()
+    is_developer = models.BooleanField(default=True)
+    is_designer = models.BooleanField(default=False)
     ent_year = models.CharField(max_length=255, null=True)
     org = models.CharField(max_length=255, null=True)
     email = models.CharField(max_length=255, null=True)
@@ -54,17 +54,14 @@ class User(models.Model):
     lab = models.CharField(max_length=255, null=True)
     home_add = models.CharField(max_length=255, null=True)
     github_id = models.CharField(max_length=255, null=True)
-    linkedin_id = models.CharField(max_length=255, null=True)
+    linkedin_url = models.CharField(max_length=255, null=True)
     facebook_id = models.CharField(max_length=255, null=True)
     twitter_id = models.CharField(max_length=255, null=True)
     battlenet_id = models.CharField(max_length=255, null=True)
     website = models.CharField(max_length=255, null=True)
     blog = models.CharField(max_length=255, null=True)
-    created_on = models.DateTimeField(default=datetime.utcnow)
-    updated_on = models.DateTimeField(default=datetime.utcnow
-                                      # auto_now=True
-                                      # , onupdate=datetime.utcnow
-                                      )
+    created_on = models.DateTimeField(default=timezone.now)
+    updated_on = models.DateTimeField(auto_now=True)
 
     @staticmethod
     def _gen_json(value_func):
