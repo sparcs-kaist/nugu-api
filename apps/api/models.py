@@ -22,9 +22,10 @@ NUGU_FIELDS = [
     {'id': 'dorm', 'name': '기숙사'},
     {'id': 'lab', 'name': '랩'},
     {'id': 'home_add', 'name': '집주소'},
+    {'id': 'github_id', 'name': 'Github ID'},
+    {'id': 'linkedin_id', 'name': 'Github ID'},
     {'id': 'facebook_id', 'name': 'Facebook ID'},
     {'id': 'twitter_id', 'name': 'Twitter ID'},
-    {'id': 'github_id', 'name': 'Github ID'},
     {'id': 'battlenet_id', 'name': 'Battlenet ID'},
     {'id': 'website', 'name': '홈페이지'},
     {'id': 'blog', 'name': '블로그'},
@@ -52,9 +53,10 @@ class User(models.Model):
     dorm = models.CharField(max_length=255, null=True)
     lab = models.CharField(max_length=255, null=True)
     home_add = models.CharField(max_length=255, null=True)
+    github_id = models.CharField(max_length=255, null=True)
+    linkedin_id = models.CharField(max_length=255, null=True)
     facebook_id = models.CharField(max_length=255, null=True)
     twitter_id = models.CharField(max_length=255, null=True)
-    github_id = models.CharField(max_length=255, null=True)
     battlenet_id = models.CharField(max_length=255, null=True)
     website = models.CharField(max_length=255, null=True)
     blog = models.CharField(max_length=255, null=True)

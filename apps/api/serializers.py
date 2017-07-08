@@ -5,4 +5,4 @@ from rest_framework import serializers
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = tuple(NUGU_FIELD_NAMES)
+        fields = ('id',) + tuple(NUGU_FIELD_NAMES)
