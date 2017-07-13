@@ -82,29 +82,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'nugu.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': os.environ['NUGU_DB_HOST'],
-        'NAME': os.environ['NUGU_DB_NAME'],
-        'USER': os.environ['NUGU_DB_USER'],
-        'PASSWORD': os.environ['NUGU_DB_PASSWORD'],
-    }
-}
-
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-'''
-
-
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
@@ -147,3 +124,10 @@ CORS_ORIGIN_WHITELIST = (
     'localhost:12345',
 )
 
+
+# import local settings
+
+try:
+    from .settings_local import *
+except ImportError:
+    pass

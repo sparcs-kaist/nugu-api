@@ -96,3 +96,6 @@ ENV/
 
 # PyCharm
 .idea/**
+
+# Private Data
+settings_local.py
