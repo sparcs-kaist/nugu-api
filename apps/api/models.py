@@ -24,6 +24,7 @@ NUGU_FIELDS = [
     {'id': 'home_add', 'name': '집주소'},
     {'id': 'github_id', 'name': 'Github ID'},
     {'id': 'linkedin_url', 'name': 'LinkedIn URL'},
+    {'id': 'behance_url', 'name': 'Behance URL'},
     {'id': 'facebook_id', 'name': 'Facebook ID'},
     {'id': 'twitter_id', 'name': 'Twitter ID'},
     {'id': 'battlenet_id', 'name': 'Battlenet ID'},
@@ -55,6 +56,7 @@ class User(models.Model):
     home_add = models.CharField(max_length=255, null=True)
     github_id = models.CharField(max_length=255, null=True)
     linkedin_url = models.CharField(max_length=255, null=True)
+    behance_url = models.CharField(max_length=255, null=True)
     facebook_id = models.CharField(max_length=255, null=True)
     twitter_id = models.CharField(max_length=255, null=True)
     battlenet_id = models.CharField(max_length=255, null=True)
