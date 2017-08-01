@@ -1,6 +1,6 @@
-from django.contrib.auth.decorators import login_required
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from apps.api.serializers import UserSerializer, UserPublicSerializer
 from .models import User
@@ -11,8 +11,8 @@ def user_list(request):
     serializer = UserPublicSerializer(users, many=True)
     return Response(serializer.data)
 
-@login_required
 @api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes((IsAuthenticated,))
 def user_detail(request, pk):
     """
     Retrieve, update or delete an user instance.
