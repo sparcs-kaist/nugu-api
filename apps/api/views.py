@@ -1,17 +1,17 @@
+from django.contrib.auth.decorators import login_required
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from apps.api.serializers import UserSerializer
+from apps.api.serializers import UserSerializer, UserPublicSerializer
 from .models import User
-
 
 @api_view(['GET'])
 def user_list(request):
     users = User.objects.all().order_by('-ent_year')
-    serializer = UserSerializer(users, many=True)
+    serializer = UserPublicSerializer(users, many=True)
     return Response(serializer.data)
 
-
+@login_required
 @api_view(['GET', 'PUT', 'DELETE'])
 def user_detail(request, pk):
     """

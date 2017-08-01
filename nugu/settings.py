@@ -44,7 +44,7 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAuthenticated',
     ],
     'PAGE_SIZE': 10
 }
@@ -123,6 +123,8 @@ CORS_ORIGIN_WHITELIST = (
     'localhost:8080',
     'localhost:12345',
 )
+
+LOGIN_URL = '/api-auth/login'
 
 
 # import local settings
