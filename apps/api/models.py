@@ -14,6 +14,7 @@ NUGU_FIELDS = [
     {'id': 'name', 'name': '이름', 'hint': '뀨냥이'},
     {'id': 'is_developer', 'name': '개발자인가', 'hint': 'false'},
     {'id': 'is_designer', 'name': '디자이너인가', 'hint': 'false'},
+    {'id': 'is_undergraduate', 'name': '학부생인가', 'hint': '0 or 1'},
     {'id': 'ent_year', 'name': '학번', 'hint': '14'},
     {'id': 'org', 'name': '소속'},
     {'id': 'email', 'name': '이메일'},
@@ -46,6 +47,7 @@ class User(models.Model):
     name = models.CharField(max_length=255, null=True)
     is_developer = models.BooleanField(default=True)
     is_designer = models.BooleanField(default=False)
+    is_undergraduate = models.BooleanField(default=True)
     ent_year = models.CharField(max_length=255, null=True)
     org = models.CharField(max_length=255, null=True)
     email = models.CharField(max_length=255, null=True)
