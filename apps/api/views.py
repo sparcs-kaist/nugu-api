@@ -6,6 +6,13 @@ from apps.api.serializers import UserSerializer, UserPublicSerializer
 from .models import User
 
 @api_view(['GET'])
+def user_public_list(request):
+    users = User.objects.filter(is_private=False).order_by('-ent_year')
+    serializer = UserPublicSerializer(users, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes((IsAuthenticated,))
 def user_list(request):
     users = User.objects.all().order_by('-ent_year')
     serializer = UserPublicSerializer(users, many=True)
