@@ -10,6 +10,7 @@ from django.db import models
 
 NUGU_FIELDS = [
     {'id': 'name', 'name': '이름', 'hint': '뀨냥이'},
+    {'id': 'is_private', 'name': '외부 비공개', 'hint': 'true'},
     {'id': 'is_developer', 'name': '개발자인가', 'hint': 'false'},
     {'id': 'is_designer', 'name': '디자이너인가', 'hint': 'false'},
     {'id': 'is_undergraduate', 'name': '학부생인가', 'hint': '0 or 1'},
@@ -43,6 +44,7 @@ class User(models.Model):
 
     id = models.CharField(max_length=30, primary_key=True)
     name = models.CharField(max_length=255, null=True)
+    is_private = models.BooleanField(default=True)
     is_developer = models.BooleanField(default=False)
     is_designer = models.BooleanField(default=False)
     is_undergraduate = models.BooleanField(default=True)
