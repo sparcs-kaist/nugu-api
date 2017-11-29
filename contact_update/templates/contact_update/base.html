@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <!--
+            XXX: For the sake of simplicity (static serving...), CSS codes has been implemented inside HTML page.
+            Note that this is NOT A BEST PRACTICE AT ALL!
+        -->
+        <style type="text/css">
+            html, body, #container, #background {
+                font-size: 12pt;
+                background-color: #ddd;
+            }
+            #content {
+                background-color: #fff;
+                padding: 20px 20px;
+            }
+            .copyright {
+                text-align: center;
+            }
+        </style>
+    <body>
+        <div id="container" class="container">
+            <div id="background" class="row align-items-center">
+                <div id="content" class="col">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+            <p class="copyright text-muted">Developed by pipoket for <a href="https://sparcs.org" target="_blank">SPARCS</a> at 2017.</p>
+        </div>
+    </body>
+</html>
