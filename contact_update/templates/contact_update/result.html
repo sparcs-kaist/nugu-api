@@ -1,0 +1,103 @@
+{% extends "contact_update/base.html" %}
+{% block content %}
+<h4>SPARCS 2017 주소록 조회 가설 페이지<br /><small>(Temporary page for SPARCS 2017 contact lookup)</h4>
+<p>2017년도 SPARCS 주소록 갱신을 위하여 마련된 주소록 조회용 임시페이지입니다.</p>
+<ul>
+    <li>아래에 본인의 연도, 아이디, 이름을 입력하면 현재 SPARCS 주소록상의 정보를 조회할 수 있습니다.</li>
+    <li>주소록 수정 기능은 정책 및 보안상의 이슈로 현재 개발되지 않은 상태로 본 페이지에서는 조회만 가능합니다.</li>
+    <li><u><b>주소록상의 정보가 오래되었거나, 수정이 필요한 경우 staff@sparcs.org 로 연락주시면 반영됩니다.</b></u></li>
+</ul>
+
+<p>This is a temporary webpage where you can lookup your contact information for "2017 SPARCS Contact Update".<p>
+<ul>
+    <li>Input the year of entering SPARCS, username, and realname to look up and check your information.</li>
+    <li>It is not possible to edit your information on this webpage due to various policy and security concerns.</li>
+    <li><u><b>If you need to update or modify the information, please feel free to contact staff by staff@sparcs.org</b></u></li>
+</ul>
+<p><a href="{% url 'contact_update_search' %}">&lt;&lt; 돌아가기 (Go back)</a></p>
+
+<strong>조회결과</strong>
+<table class="table">
+    <tr>
+        <th scope="row">이름<br /><small class="text-muted">Name</small></th>
+        <td>{{ user.name|default_if_none:"" }}</td>
+    </tr>
+    <tr>
+        <th scope="row">학번<br /><small class="text-muted">Year</small></th>
+        <td>{{ user.ent_year|default_if_none:"" }}</td>
+    </tr>
+    <tr>
+        <th scope="row">소속<br /><small class="text-muted">Organization</small></th>
+        <td>{{ user.org|default_if_none:"" }}</td>
+    </tr>
+    <tr>
+        <th scope="row">이메일<br /><small class="text-muted">Email</small></th>
+        <td>{{ user.email|default_if_none:"" }}</td>
+    </tr>
+    <tr>
+        <th scope="row">전화번호<br /><small class="text-muted">Phone</small></th>
+        <td>{{ user.phone|default_if_none:"" }}</td>
+    </tr>
+    <tr>
+        <th scope="row">생일<br /><small class="text-muted">Birth</small></th>
+        <td>{{ user.birth|default_if_none:"" }}</td>
+    </tr>
+    <tr>
+        <th scope="row">기숙사<br /><small class="text-muted">Dormitory</small></th>
+        <td>{{ user.dorm|default_if_none:"" }}</td>
+    </tr>
+    <tr>
+        <th scope="row">연구실(랩)<br /><small class="text-muted">Laboratory</small></th>
+        <td>{{ user.lab|default_if_none:"" }}</td>
+    </tr>
+    <tr>
+        <th scope="row">집주소<br /><small class="text-muted">Home address</small></th>
+        <td>{{ user.home_add|default_if_none:"" }}</td>
+    </tr>
+    <tr>
+        <th scope="row">Website</th>
+        <td>{{ user.website|default_if_none:"" }}</td>
+    </tr>
+    <tr>
+        <th scope="row">Blog</th>
+        <td>{{ user.blog|default_if_none:"" }}</td>
+    </tr>
+    <tr>
+        <th scope="row">Github ID</th>
+        <td>{{ user.github_id|default_if_none:"" }}</td>
+    </tr>
+    <tr>
+        <th scope="row">Facebook ID</th>
+        <td>{{ user.facebook_id|default_if_none:"" }}</td>
+    </tr>
+    <tr>
+        <th scope="row">Twitter ID</th>
+        <td>{{ user.twitter_id|default_if_none:"" }}</td>
+    </tr>
+    <tr>
+        <th scope="row">LinkedIn URL</th>
+        <td>{{ user.linkedin_url|default_if_none:"" }}</td>
+    </tr>
+    <tr>
+        <th scope="row">Behance URL</th>
+        <td>{{ user.behance_url|default_if_none:"" }}</td>
+    </tr>
+    <tr>
+        <th scope="row">Battlenet ID</th>
+        <td>{{ user.battlenet_id|default_if_none:"" }}</td>
+    </tr>
+    <tr>
+        <th scope="row">홈페이지 노출여부<br /><small class="text-muted">Visible on SPARCS website publicly</small></th>
+        <td>{% if user.is_private %}비공개 (Not visible){% else %}공개 (Visible){% endif %}</td>
+    </tr>
+    <tr>
+        <th scope="row">학부생 여부<br /><small class="text-muted">Is an undergraduate student?</small></th>
+        <td>{% if user.is_undergraduate %}네 (Yes){% else %}아니오 (No){% endif %}</td>
+    </tr>
+    <tr>
+        <th scope="row">마지막 수정일시<br /><small class="text-muted">Last updated at</small></th>
+        <td>{{ user.updated_on|date:"Y-m-d H:i:s" }} (GMT)</td>
+    </tr>
+</table>
+<p><a href="{% url 'contact_update_search' %}">&lt;&lt; 돌아가기 (Go back)</a></p>
+{% endblock %}

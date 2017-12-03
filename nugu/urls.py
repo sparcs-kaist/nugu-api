@@ -8,7 +8,10 @@ urlpatterns = [
     url(r'^users/$', views.user_list),
     url(r'^users/(?P<pk>[A-Za-z0-9]+)$', views.user_detail),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^admin/', admin.site.urls)
+    url(r'^admin/', admin.site.urls),
+
+    # (pipoket): Temporary URL for 2017 contact update (read only)
+    url(r'^contact-update/', include('contact_update.urls')),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
